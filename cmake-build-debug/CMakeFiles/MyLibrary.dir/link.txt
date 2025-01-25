@@ -1,0 +1,2 @@
+/usr/bin/ar qc libMyLibrary.a CMakeFiles/MyLibrary.dir/src/MT.cpp.o CMakeFiles/MyLibrary.dir/src/TileSet.cpp.o CMakeFiles/MyLibrary.dir/src/Solver.cpp.o CMakeFiles/MyLibrary.dir/src/main.cpp.o
+/usr/bin/ranlib libMyLibrary.a

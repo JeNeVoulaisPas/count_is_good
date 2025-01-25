@@ -1,0 +1,4 @@
+/mnt/c/Users/paulo/CLionProjects/count_is_good/cmake-build-debug/CMakeFiles/MyLibrary.dir
+/mnt/c/Users/paulo/CLionProjects/count_is_good/cmake-build-debug/CMakeFiles/count_is_good.dir
+/mnt/c/Users/paulo/CLionProjects/count_is_good/cmake-build-debug/CMakeFiles/edit_cache.dir
+/mnt/c/Users/paulo/CLionProjects/count_is_good/cmake-build-debug/CMakeFiles/rebuild_cache.dir

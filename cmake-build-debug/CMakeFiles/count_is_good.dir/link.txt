@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/count_is_good.dir/src/main.cpp.o -o count_is_good  libMyLibrary.a 
