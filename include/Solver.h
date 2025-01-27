@@ -41,7 +41,7 @@ private:
     int applyOperation(int a, int b, char op) {
         switch (op) {
             case '+': return a + b;
-            case '-': return (a > b) ? a - b : -1;
+            case '-': return (a > b) ? a - b : -1; // Can be avoided with abs but it's longer according to my tests
             case '*': return a * b;
             case '/': return (b != 0 && a % b == 0) ? a / b : -1;
             default: return -1;
