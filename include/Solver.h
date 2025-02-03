@@ -85,14 +85,28 @@ private:
 
         // Try all possible combinations of tiles and operations
         for (size_t i = 0; i < tileSet.tiles.size(); ++i) {
-            for (size_t j = 0; j < tileSet.tiles.size(); ++j) {
-                if (i != j) {
-                    for (char op : operations) {
-                        int a = tileSet.tiles[i];
-                        int b = tileSet.tiles[j];
+            for (size_t j = i+1; j < tileSet.tiles.size(); ++j) {
+                for (char op : operations) {
+                    int a = tileSet.tiles[i];
+                    int b = tileSet.tiles[j];
 
-                        // a op b
-                        int result = applyOperation(a, b, op);
+                    // a op b
+                    int result = applyOperation(a, b, op);
+                    if (result != -1) { // -1 means the operation is invalid
+                        TileSet newTileSet(tileSet.tiles);
+                        newTileSet.removeTile(std::max(i, j));
+                        newTileSet.removeTile(std::min(i, j));
+                        newTileSet.addTile(result);
+
+                        std::vector<std::string> newExpressions = expressions;
+                        newExpressions.push_back("(" + std::to_string(a) + " " + op + " " + std::to_string(b) + ")");
+
+                        findSolution(newTileSet, newExpressions);
+                    }
+
+                    // b op a for non commutative op
+                    if (op == '-' || op == '/') {
+                        result = applyOperation(b, a, op);
                         if (result != -1) { // -1 means the operation is invalid
                             TileSet newTileSet(tileSet.tiles);
                             newTileSet.removeTile(std::max(i, j));
@@ -100,25 +114,9 @@ private:
                             newTileSet.addTile(result);
 
                             std::vector<std::string> newExpressions = expressions;
-                            newExpressions.push_back("(" + std::to_string(a) + " " + op + " " + std::to_string(b) + ")");
+                            newExpressions.push_back("(" + std::to_string(b) + " " + op + " " + std::to_string(a) + ")");
 
                             findSolution(newTileSet, newExpressions);
-                        }
-
-                        // b op a for non commutative op
-                        if (op == '-' || op == '/') {
-                            result = applyOperation(b, a, op);
-                            if (result != -1) { // -1 means the operation is invalid
-                                TileSet newTileSet(tileSet.tiles);
-                                newTileSet.removeTile(std::max(i, j));
-                                newTileSet.removeTile(std::min(i, j));
-                                newTileSet.addTile(result);
-
-                                std::vector<std::string> newExpressions = expressions;
-                                newExpressions.push_back("(" + std::to_string(b) + " " + op + " " + std::to_string(a) + ")");
-
-                                findSolution(newTileSet, newExpressions);
-                            }
                         }
                     }
                 }
